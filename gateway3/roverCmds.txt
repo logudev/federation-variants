@@ -1,0 +1,24 @@
+** Composition in Apollo Studio with Remote Subgraphs **
+
+
+rover graph introspect http://localhost:4001/graphql > subgraph_schema/merchants.graphql
+
+rover graph introspect http://localhost:4002/graphql > subgraph_schema/transactions.graphql
+  
+rover subgraph publish demograph-t28aw8@current \
+--name merchants \
+--routing-url http://localhost:4001/ \
+--schema ./subgraph_schema/merchants.graphql \
+--convert
+
+  rover subgraph publish demograph-t28aw8@current \
+--name transactions \
+--routing-url http://localhost:4002/ \
+--schema ./subgraph_schema/transactions.graphql \
+--convert
+
+
+
+rover subgraph introspect http://localhost:4001/ \
+  | rover subgraph check demograph-t28aw8@current \
+  --schema - --name merchants

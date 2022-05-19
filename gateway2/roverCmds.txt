@@ -1,0 +1,4 @@
+Using Rover CLI:
+
+rover supergraph compose --config ./supergraph-config.yaml > supergraph.graphql
+
