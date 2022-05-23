@@ -5,16 +5,21 @@ type Merchant {
   email: String!
   name: String!
   capabilities: [MerchantCapability!]!
-  PAN: String!
+  transactions: [Transaction!]
+}
+type Transaction {
+  id: ID!
 }
 type Query {
   merchant(id: ID!): Merchant
   merchants: [Merchant!]
+  _entities(representations: [_Any!]!): [_Entity]!
   _service: _Service!
 }
 type _Service {
   sdl: String
 }
+union _Entity = Merchant | Transaction
 enum MerchantCapability {
   ALLTAP
   PLURAL

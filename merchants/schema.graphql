@@ -16,6 +16,10 @@ enum MerchantCapability {
   PLUTUS
 }
 
+input LoginInput {
+  
+}
+
 type Query {
   merchant(id: ID!): Merchant
   merchants: [Merchant!]

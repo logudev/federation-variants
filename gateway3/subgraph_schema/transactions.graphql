@@ -9,11 +9,13 @@ type Transaction {
 type Query {
   transaction(id: ID!): Transaction
   transactions: [Transaction]
+  _entities(representations: [_Any!]!): [_Entity]!
   _service: _Service!
 }
 type _Service {
   sdl: String
 }
+union _Entity = Transaction
 enum TransactionType {
   PLUTUS
   ALLTAP

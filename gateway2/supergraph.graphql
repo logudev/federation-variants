@@ -38,13 +38,13 @@ enum link__Purpose {
 }
 
 type Merchant
-  @join__type(graph: MERCHANTS)
+  @join__type(graph: MERCHANTS, key: "id")
 {
   id: ID!
   email: String!
   name: String!
   capabilities: [MerchantCapability!]!
-  PAN: String!
+  transactions: [Transaction!]
 }
 
 enum MerchantCapability
@@ -66,12 +66,13 @@ type Query
 }
 
 type Transaction
-  @join__type(graph: TRANSACTIONS)
+  @join__type(graph: MERCHANTS, key: "id")
+  @join__type(graph: TRANSACTIONS, key: "id")
 {
   id: ID!
-  amount: Float!
-  type: TransactionType!
-  date: String!
+  amount: Float! @join__field(graph: TRANSACTIONS)
+  type: TransactionType! @join__field(graph: TRANSACTIONS)
+  date: String! @join__field(graph: TRANSACTIONS)
 }
 
 enum TransactionType
